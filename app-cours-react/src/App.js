@@ -25,15 +25,13 @@ function App() {
   ])
 
   const addExpenses = (event) => {
-    console.log(event.target['name'].value)
     setExpenses((oldExpenses) => {
-      oldExpenses.push({
+      return [{
         id: 'e5',
         title: event.target['name'].value,
         amount: event.target['prix'].value,
         date: new Date(2023, 1, 10),
-      })
-      return oldExpenses
+      }, ...oldExpenses]
     }) 
     console.log(expenses)
   }
