@@ -1,9 +1,10 @@
+import { keyboard } from '@testing-library/user-event/dist/keyboard';
 import { useState } from 'react';
 import './App.css';
 
 function App() {
   const appel = () => {
-    console.log(mergeObjects({a: "fsd", b: "dqd"}, {c:"er", d:"fes"}))
+    console.log(sortObject({b: 2, a: 1, c:3}))
   }
 
   const findLargestNumber = (arrayNumber) => {
@@ -45,7 +46,27 @@ function App() {
   }
 
   const mergeObjects = (firstOject, secondObject) => {
-    return {...Object.values(firstOject), ...Object.values(secondObject)}
+    return {...firstOject, ...secondObject}
+  }
+
+  const sumArray = (anArray) => {
+    let cont = 0
+    anArray.forEach(aNumber => {
+      cont += aNumber
+    })
+    return cont
+  }
+
+  const sortObject = (anObject) => {
+    let anArray = []
+    for(let element in anObject){
+      anArray.push(element)
+    }
+    anArray.sort()
+    for(let element in anObject){
+      anArray.push(element)
+    }
+    return anArray
   }
 
   return (
