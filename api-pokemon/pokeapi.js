@@ -14,4 +14,8 @@ pokeapi.getPokemon = (id) => {
     })
 }
 
+pokeapi.getTabPokemon = (tab) => {
+    
+}
+
 module.exports = pokeapi;
