@@ -9,20 +9,50 @@
     transition: all .3s ease-out;
 }
 
+.card.normal{
+    background-color: rgb(210, 210, 210);
+}
 .card.fire{
-    background-color: red;
+    background-color: rgb(255, 0, 0);
 }
 .card.grass{
     background-color: green;
 }
 .card.water{
-    background-color: cyan;
+    background-color: blue;
 }
 .card.dark{
-    background-color: rgb(95, 95, 95);
+    background-color: rgb(50, 50, 50);
 }
 .card.poison{
+    background-color: magenta;
+}
+.card.ice{
+    background-color: cyan;
+}
+.card.rock{
+    background-color: rgb(145, 54, 29);
+}
+.card.ground{
+    background-color: rgb(231, 119, 39);
+}
+.card.electric{
+    background-color: yellow;
+}
+.card.psychic{
     background-color: blueviolet;
+}
+.card.bug{
+    background-color: rgb(37, 225, 16);
+}
+.card.fighting{
+    background-color: rgb(140, 21, 21);
+}
+.card.ghost{
+    background-color: rgb(58, 17, 92);
+}
+.card.dragon{
+    background-color: midnightblue;
 }
 
 .card.position0{
@@ -82,7 +112,13 @@
 }
 
 .card.card.position7{
-    
+    position: absolute;
+    top: 0;
+}
+.card.card.position7:hover{
+    position: absolute;
+    top: 0;
+    transform: translate(0, 5%) scale(1.1, 1.1);
 }
 
 .card .title{

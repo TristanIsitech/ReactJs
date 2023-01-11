@@ -1,9 +1,12 @@
 import './Card.css';
 
 function Game(props) {
+    const moveACard = () => {
+        props.moveCard(props.index)
+    }
 
     return (
-        <div className={props.pokemon.types[0].type.name + ' card position' + props.position}>
+        <div className={props.pokemon.types[0].type.name + ' card position' + props.position} onClick={moveACard}>
             <div className='title'>
                 <p className='hp'>{props.pokemon.stats[0].stat.name} : {props.pokemon.stats[0].base_stat}</p>
                 <h1>{props.pokemon.name}</h1>
