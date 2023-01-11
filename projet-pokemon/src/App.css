@@ -1,0 +1,6 @@
+.app {
+    background-image: url('https://pbs.twimg.com/media/E-SK6TaVkAYVz5V?format=jpg&name=large');
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+}

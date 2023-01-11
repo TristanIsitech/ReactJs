@@ -30,7 +30,7 @@ function App() {
   }, [])
 
   return (
-    <div>
+    <div className='app'>
       {userInfo && <Game userInfo={userInfo}></Game>}
     </ div>
   )

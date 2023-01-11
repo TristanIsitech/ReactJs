@@ -1,0 +1,117 @@
+.card{
+    height: 350px;
+    width: 270px;
+    display: flex;
+    border: 2px solid rgba(0, 0, 0, 0.4);
+    border-radius: 10px;
+    flex-direction: column;
+    cursor: pointer;
+    transition: all .3s ease-out;
+}
+
+.card.fire{
+    background-color: red;
+}
+.card.grass{
+    background-color: green;
+}
+.card.water{
+    background-color: cyan;
+}
+.card.dark{
+    background-color: rgb(95, 95, 95);
+}
+.card.poison{
+    background-color: blueviolet;
+}
+
+.card.position0{
+    transform: translate(0, 2%);
+}
+.card.position0:hover{
+    transform: translate(0, -10%) scale(1.2, 1.2);
+    z-index: 100;
+}
+
+.card.position1{
+    transform: translate(150%, 25%) rotate(-25deg);
+}
+.card.position1:hover{
+    transform: translate(150%, -10%) rotate(-5deg) scale(1.2, 1.2);
+    z-index: 100;
+}
+
+.card.position2{
+    transform: translate(90%, 12%) rotate(-12deg);
+}
+.card.position2:hover{
+    transform: translate(90%, -10%) rotate(-5deg) scale(1.2, 1.2);
+    z-index: 100;
+}
+
+.card.position3{
+    transform: translate(30%, 5%) rotate(-5deg);
+}
+.card.position3:hover{
+    transform: translate(30%, -10%) rotate(-5deg) scale(1.2, 1.2);
+    z-index: 100;
+}
+
+.card.position4{
+    transform: translate(-30%, 5%) rotate(5deg);
+}
+.card.position4:hover{
+    transform: translate(-30%, -10%) rotate(5deg) scale(1.2, 1.2);
+    z-index: 100;
+}
+
+.card.position5{
+    transform: translate(-90%, 12%) rotate(12deg);
+}
+.card.position5:hover{
+    transform: translate(-90%, -10%) rotate(5deg) scale(1.2, 1.2);
+    z-index: 100;
+}
+
+.card.position6{
+    transform: translate(-150%, 25%) rotate(25deg);
+}
+.card.position6:hover{
+    transform: translate(-150%, -10%) rotate(5deg) scale(1.2, 1.2);
+    z-index: 100;
+}
+
+.card.card.position7{
+    
+}
+
+.card .title{
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 10px 0 10px;
+}
+
+.card h1{
+    font-size: 22px;
+    font-weight: 300;
+}
+
+.card h2{
+    padding: 0 10px 0 10px;
+}
+
+.card img{
+    width: 220px;
+    height: auto;
+    padding: 0 25px 10px;
+}
+
+.card .stats{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+
+.card .stat{
+    white-space:nowrap
+}

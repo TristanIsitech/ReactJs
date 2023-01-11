@@ -1,0 +1,16 @@
+.game {
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.game .hand {
+    width: 70%;
+    padding-left: 15%;
+    height: 90%;
+    position: fixed;
+    display: flex;
+    justify-content: space-evenly;
+    bottom: 0;
+    align-items: flex-end;
+}
