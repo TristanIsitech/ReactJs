@@ -1,13 +1,13 @@
 // Importer les modules
 const app = require('express')()
-// const bodyParser = require('body-parser')
-// const { resolveSoa } = require('dns')
-// const jsonParser = bodyParser.json()
+const bodyParser = require('body-parser')
+const jsonParser = bodyParser.json()
 const db = require('./db.js')
+const pokeapi = require('./pokeapi.js')
 
 // Definir le header
-app.use(function(req, res, next) {
-    res.header("Access-Control-Allow-Origin", "https://localhost:3000")
+app.use(function (req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*") //http://localhost:3000")
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept")
     next()
 })
@@ -24,23 +24,66 @@ app.listen(PORT, () => {
     console.log('=================================================================')
 })
 
-// Cree une route pour la page d'accueil '/'
-app.get('/', (req, res) => {
+// Route de connection 
+app.get('/api/connectUser', async (req, res) => {
     let st = 200
-    app.affiche(req, st)
-    res.send("Hello")
+    try {
+        results = await db.connection(req.query)
+        st = 200
+    } catch (e) {
+        console.log(e)
+        results = e
+        st = 500
+    }
+    app.affiche(req.ip, st)
+    res.status(st).send(results)
 })
 
-// Route pour rechercher les données de la base de donnée
-app.post('/donnees', async(req, res) => {
-    const contenu = req.body
-    console.log(contenu.id)
-    let results = {}
-    let st = null
+// Route de creation d'utilisateur 
+app.post('/api/createUser', jsonParser, async (req, res) => {
+    let st = 200
+    try {
+        results = await db.notUser(req.body.id)
+        if (results == null || results == []) {
+            results = await db.createConnection(req.body)
+            st = 200
+        }
+        else {
+            results = "This user already exist !"
+            st = 409
+        }
+    } catch (e) {
+        console.log(e)
+        results = e
+        st = 500
+    }
+    app.affiche(req.ip, st)
+    res.status(st).send(results)
+})
+
+// Route pour recuperer un pokemon random
+app.get('/api/randomPokemon', async (req, res) => {
+    let st = 200
+    let random = Math.floor(Math.random() * 905)
+    console.log(random)
+    results = {}
 
     try {
-        results = await db.visite(contenu.id)
-        st = 200
+        results = await pokeapi.getPokemon(random)
+    } catch (e) {
+        console.log(e)
+        results = e
+        st = 500
+    }
+    app.affiche(req.ip, st)
+    res.status(st).send(results)
+})
+
+// Route pour ajouter un pokemon
+app.put('/api/addPokemon', jsonParser, async (req, res) => {
+    let st = 200
+    try {
+        results = await db.addPokemon(req.body.id, req.body.num, req.body.idPoke)
     } catch (e) {
         console.log(e)
         results = e
@@ -55,9 +98,9 @@ app.affiche = (ip, st) => {
     let heures = date.getHours()
     let minutes = date.getMinutes()
     let secondes = date.getSeconds()
-    let jour = date.getDay()
-    let mois = date.getMonth()
+    let jour = date.getUTCDate()
+    let mois = date.getMonth() + 1
     let annee = date.getFullYear()
-    console.log(ip)
-    console.log(`IP : ${ip} | DATE : ${jour >= 10 ? jour : '0' + jour}/${mois >= 10 ? mois : '0' + mois}/${annee} | HEURE : ${heures >= 10 ? heures : '0' + heures}:${minutes >= 10 ? minutes : '0' + minutes}:${secondes >= 10 ? secondes : '0' + secondes} | RESULTS : ${st}`)
+
+    console.log(`IP : ${ip.substr(7)} | DATE : ${jour >= 10 ? jour : '0' + jour}/${mois >= 10 ? mois : '0' + mois}/${annee} | HEURE : ${heures >= 10 ? heures : '0' + heures}:${minutes >= 10 ? minutes : '0' + minutes}:${secondes >= 10 ? secondes : '0' + secondes} | RESULTS : ${st}`)
 }

@@ -1,6 +1,4 @@
 const mysql = require('mysql');
-//const Sha512 = require("crypto-js/sha512")
-//const Hex = require("crypto-js/enc-hex")
 
 const pool = mysql.createPool({
     connectionLimit: 10,
@@ -13,10 +11,9 @@ const pool = mysql.createPool({
 
 let dbpokemon = {};
 
-dbpokemon.medecin = () => {
+dbpokemon.connection = (reqQuery) => {
     return new Promise((resolve, reject) => {
-        pool.query(`SELECT id, nom, prenom as 'prénom', adresse, tel as 'téléphone', specialitecomplementaire as 'spécialité complémentaire', 
-        departement as 'département' FROM medecin`, (err, results) => {
+        pool.query(`SELECT * FROM player WHERE id='` + reqQuery.id + `' AND psw='` + reqQuery.psw + `'`, (err, results) => {
             if (err) {
                 return reject(err)
             }
@@ -25,9 +22,31 @@ dbpokemon.medecin = () => {
     })
 }
 
-dbpokemon.offre = () => {
+dbpokemon.notUser = (id) => {
     return new Promise((resolve, reject) => {
-        pool.query(`SELECT * FROM offrir ORDER BY idRapport`, (err, results) => {
+        pool.query(`SELECT * FROM player WHERE id='` + id + `'`, (err, results) => {
+            if (err) {
+                return reject(err)
+            }
+            return resolve(results)
+        })
+    })
+}
+
+dbpokemon.createConnection = (id, psw, pseudo) => {
+    return new Promise((resolve, reject) => {
+        pool.query(`INSERT INTO player(id, pseudo, psw, champion) VALUES ('` + id + `', '` + pseudo + `', '` + psw + `', false)`, (err, results) => {
+            if (err) {
+                return reject(err)
+            }
+            return resolve(results)
+        })
+    })
+}
+
+dbpokemon.addPokemon = (id, num, idPoke) => {
+    return new Promise((resolve, reject) => {
+        pool.query(`UPDATE player SET poke_id` + num + ` = '` + idPoke + `' WHERE id = '` + id + `'`, (err, results) => {
             if (err) {
                 return reject(err)
             }
