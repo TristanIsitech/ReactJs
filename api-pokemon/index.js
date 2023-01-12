@@ -8,6 +8,7 @@ const pokeapi = require('./pokeapi.js')
 // Definir le header
 app.use(function (req, res, next) {
     res.header("Access-Control-Allow-Origin", "*") //http://localhost:3000")
+    res.header("Access-Control-Allow-Methods", "*")
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept")
     next()
 })
@@ -66,7 +67,7 @@ app.get('/api/connectUser', async (req, res) => {
         results = e
         st = 500
     }
-    app.affiche(req.ip, st)
+    app.affiche(req.ip, st, 'connectUser')
     res.status(st).send(results)
 })
 
@@ -88,7 +89,7 @@ app.post('/api/createUser', jsonParser, async (req, res) => {
         results = e
         st = 500
     }
-    app.affiche(req.ip, st)
+    app.affiche(req.ip, st, 'createUser')
     res.status(st).send(results)
 })
 
@@ -96,9 +97,6 @@ app.post('/api/createUser', jsonParser, async (req, res) => {
 app.get('/api/randomPokemon', async (req, res) => {
     let st = 200
     let random = Math.floor(Math.random() * 905)
-    console.log(random)
-    results = {}
-
     try {
         results = await pokeapi.getPokemon(random)
     } catch (e) {
@@ -106,25 +104,28 @@ app.get('/api/randomPokemon', async (req, res) => {
         results = e
         st = 500
     }
-    app.affiche(req.ip, st)
+    app.affiche(req.ip, st, 'randomPokemon')
     res.status(st).send(results)
 })
 
-// Route pour ajouter un pokemon
-app.put('/api/addPokemon', jsonParser, async (req, res) => {
+// Route pour ajouter les pokemons
+app.put('/api/addPokemons', jsonParser, async (req, res) => {
     let st = 200
+    results = ''
     try {
-        results = await db.addPokemon(req.body.id, req.body.num, req.body.idPoke)
+        req.body.tab.forEach(async(pokemon, id) => {
+            results[id] = await db.addPokemon(req.body.id, id + 1, pokemon)
+        });
     } catch (e) {
         console.log(e)
         results = e
         st = 500
     }
-    app.affiche(req.ip, st)
+    app.affiche(req.ip, st, 'addPokemons')
     res.status(st).send(results)
 })
 
-app.affiche = (ip, st) => {
+app.affiche = (ip, st, path) => {
     let date = new Date()
     let heures = date.getHours()
     let minutes = date.getMinutes()
@@ -133,5 +134,5 @@ app.affiche = (ip, st) => {
     let mois = date.getMonth() + 1
     let annee = date.getFullYear()
 
-    console.log(`IP : ${ip.substr(7)} | DATE : ${jour >= 10 ? jour : '0' + jour}/${mois >= 10 ? mois : '0' + mois}/${annee} | HEURE : ${heures >= 10 ? heures : '0' + heures}:${minutes >= 10 ? minutes : '0' + minutes}:${secondes >= 10 ? secondes : '0' + secondes} | RESULTS : ${st}`)
+    console.log(`IP : ${ip.substr(7)} | DATE : ${jour >= 10 ? jour : '0' + jour}/${mois >= 10 ? mois : '0' + mois}/${annee} | HEURE : ${heures >= 10 ? heures : '0' + heures}:${minutes >= 10 ? minutes : '0' + minutes}:${secondes >= 10 ? secondes : '0' + secondes} | PATH : /api/${path} | RESULTS : ${st}`)
 }

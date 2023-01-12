@@ -6,13 +6,25 @@ import axios from 'axios'
 
 function Game(props) {
     const [centerCard, setCenterCard] = useState(null)
-    const [pokemonTab, setPokemonTab] = useState(props.userInfo.pokemons)
+    // const [pokemonTab, setPokemonTab] = useState(props.userInfo.pokemons)
     const [isRandomCard, setIsRandomCard] = useState(false)
 
+    const dispatchUserInfo = (action) => {
+        props.dispatchUserInfo(action)
+    }
+
+    // const updateTabPokemon = () => {
+    //     // !! A faire fonctionner, éviter les requêtes sur l'api quand aucun changement n'a été effectué
+    //     if (pokemonTab !== props.userInfo.pokemons) {
+    //         props.updateTabPokemon([pokemonTab[0].id, pokemonTab[1].id, pokemonTab[2].id, pokemonTab[3].id, pokemonTab[4].id, pokemonTab[5].id])
+    //     }
+    // }
+
     const positioning = (index) => {
-        const filtered = pokemonTab.filter((element) => {
+        const filtered = props.userInfo.pokemons.filter((element) => {
             return element !== null
         })
+        console.log(filtered)
         switch (filtered.length) {
             case 1:
                 return 0
@@ -68,30 +80,26 @@ function Game(props) {
     }
 
     const moveCard = (index) => {
+        // == Si la carte cliquée n'est pas au centre
         if (index !== 7) {
-            if (isRandomCard) {
-                setPokemonTab((oldPokemonTab) => {
-                    return [...props.userInfo.pokemons.filter((pokemon) => pokemon.id !== oldPokemonTab[index].id), centerCard]
-                })
-                setCenterCard(pokemonTab[index])
-            } 
-            else {
-                setCenterCard(pokemonTab[index])
-                setPokemonTab((oldPokemonTab) => {
-                    return props.userInfo.pokemons.filter((pokemon) => pokemon.id !== oldPokemonTab[index].id)
-                })
-            }
-
+            // On echange la carte du centre avec celle selectionnée dans la main
+            const oldCenterCard = centerCard
+            setCenterCard(props.userInfo.pokemons[index])
+            dispatchUserInfo({ type: 'UPDATE_POKEMONS', index: index, card: oldCenterCard })
         } else {
-            if (isRandomCard) {
+            // = Si on est en train de chosir une carte au hazar
+            // if (isRandomCard) {
+            //     // On enlève la carte du centre et on met en bdd la main
+            //     setCenterCard(null)
+            //     // updateTabPokemon()
+            //     setIsRandomCard(false)
+            // }
+            // = Si on n'est pas en train de choisir une carte 
+            // else {
+                // On replace la carte du centre dans la main
+                dispatchUserInfo({ type: 'UPDATE_POKEMONS_ADD_CARD', card: centerCard })
                 setCenterCard(null)
-            }
-            else {
-                setPokemonTab((oldPokemonTab) => {
-                    return [...oldPokemonTab, centerCard]
-                })
-                setCenterCard(null)
-            }
+            // }
         }
     }
 
@@ -99,7 +107,7 @@ function Game(props) {
         <div className='game'>
             <Savage getARandomCard={getARandomCard} />
             <div className='hand'>
-                {pokemonTab.map((pokemon, index) => (
+                {props.userInfo.pokemons.map((pokemon, index) => (
                     pokemon && <Card pokemon={pokemon} key={index} index={index} position={positioning(index)} moveCard={moveCard} />
                 ))
                 }

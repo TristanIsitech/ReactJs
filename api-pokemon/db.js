@@ -44,9 +44,9 @@ dbpokemon.createConnection = (id, psw, pseudo) => {
     })
 }
 
-dbpokemon.addPokemon = (id, num, idPoke) => {
+dbpokemon.addPokemon = (id, num, idpoke) => {
     return new Promise((resolve, reject) => {
-        pool.query(`UPDATE player SET poke_id` + num + ` = '` + idPoke + `' WHERE id = '` + id + `'`, (err, results) => {
+        pool.query(`UPDATE player SET poke_id` + num + ` = '` + idpoke + `' WHERE id = '` + id + `'`, (err, results) => {
             if (err) {
                 return reject(err)
             }

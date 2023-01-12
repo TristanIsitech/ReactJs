@@ -54,6 +54,15 @@
 .card.dragon{
     background-color: midnightblue;
 }
+.card.fairy{
+    background-color: pink;
+}
+.card.flying{
+    background-color: rgb(138, 237, 237);
+}
+.card.steel{
+    background-color: darkgray;
+}
 
 .card.position0{
     transform: translate(0, 2%);
