@@ -6,7 +6,6 @@ import axios from 'axios'
 
 function Game(props) {
     const [centerCard, setCenterCard] = useState(null)
-    // const [pokemonTab, setPokemonTab] = useState(props.userInfo.pokemons)
     const [isRandomCard, setIsRandomCard] = useState(false)
 
     const dispatchUserInfo = (action) => {
@@ -24,7 +23,10 @@ function Game(props) {
         const filtered = props.userInfo.pokemons.filter((element) => {
             return element !== null
         })
-        console.log(filtered)
+        index = filtered.filter((element) => {
+            return element.id === props.userInfo.pokemons[index].id
+        })
+        index = filtered.indexOf(index[0])
         switch (filtered.length) {
             case 1:
                 return 0
@@ -88,18 +90,18 @@ function Game(props) {
             dispatchUserInfo({ type: 'UPDATE_POKEMONS', index: index, card: oldCenterCard })
         } else {
             // = Si on est en train de chosir une carte au hazar
-            // if (isRandomCard) {
-            //     // On enlève la carte du centre et on met en bdd la main
-            //     setCenterCard(null)
-            //     // updateTabPokemon()
-            //     setIsRandomCard(false)
-            // }
+            if (isRandomCard) {
+                // On enlève la carte du centre et on met en bdd la main
+                setCenterCard(null)
+                // updateTabPokemon()
+                setIsRandomCard(false)
+            }
             // = Si on n'est pas en train de choisir une carte 
-            // else {
+            else {
                 // On replace la carte du centre dans la main
                 dispatchUserInfo({ type: 'UPDATE_POKEMONS_ADD_CARD', card: centerCard })
                 setCenterCard(null)
-            // }
+            }
         }
     }
 
