@@ -14,3 +14,14 @@
     bottom: 0;
     align-items: flex-end;
 }
+
+.game .hand .addCard{
+    position: absolute;
+    bottom: 320px;
+    right: 0;
+    height: 50px;
+    width: 50px;
+    font-size: 35px;
+    border-radius: 50%;
+    cursor: pointer;
+}

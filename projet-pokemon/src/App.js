@@ -1,38 +1,17 @@
 import './App.css'
 import Game from './Game/Game.js'
-import React, { useEffect, useReducer, useContext } from 'react'
-import { myAppContext } from './Store/appContext';
-import axios from 'axios'
+import Connexion from './Connexion/Connection'
+import Loading from './Loading/Loading'
+import { Routes, Route } from 'react-router-dom';
 
 function App() {
 
-  const context = useContext(myAppContext)
-
-  useEffect(() => {
-    axios.get("http://localhost:5400/api/connectUser?id=tristanL&psw=test")
-      .then((res) => {
-        context.dispatchUserInfo({ type: 'INITIALISE', payload: res.data })
-      })
-      .catch((err) => {
-        console.log("error : ", err)
-      })
-  }, [])
-
-  // const updateTabPokemon = async (tabPokemon) => {
-  //   const jsonBody = {
-  //     "id": userInfo.id,
-  //     "tab": tabPokemon
-  //   }
-  //   console.log(jsonBody)
-  //   await axios.put("http://localhost:5400/api/addPokemons", jsonBody)
-  //     .catch((err) => {
-  //       console.log("error : ", err)
-  //     })
-  // }
-
   return (
     <div className='app'>
-      {context.userInfo && <Game userInfo={context.userInfo} dispatchUserInfo={context.dispatchUserInfo}></Game>}
+      <Routes>
+        <Route path="/" element={<Loading />} />
+        <Route path="/game" element={<Game />} />
+      </Routes>
     </ div>
   )
 }

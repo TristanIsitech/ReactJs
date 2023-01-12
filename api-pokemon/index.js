@@ -43,23 +43,35 @@ app.get('/api/connectUser', async (req, res) => {
                 results[0].poke_id6
             ]
         }
-        if(results.pokemons[0]){
+        if (results.pokemons[0]) {
             results.pokemons[0] = await pokeapi.getPokemon(results.pokemons[0])
+        } else {
+            results.pokemons[0] = null
         }
-        if(results.pokemons[1]){
+        if (results.pokemons[1]) {
             results.pokemons[1] = await pokeapi.getPokemon(results.pokemons[1])
+        } else {
+            results.pokemons[1] = null
         }
-        if(results.pokemons[2]){
+        if (results.pokemons[2]) {
             results.pokemons[2] = await pokeapi.getPokemon(results.pokemons[2])
+        } else {
+            results.pokemons[2] = null
         }
-        if(results.pokemons[3]){
+        if (results.pokemons[3]) {
             results.pokemons[3] = await pokeapi.getPokemon(results.pokemons[3])
+        } else {
+            results.pokemons[3] = null
         }
-        if(results.pokemons[4]){
+        if (results.pokemons[4]) {
             results.pokemons[4] = await pokeapi.getPokemon(results.pokemons[4])
+        } else {
+            results.pokemons[4] = null
         }
-        if(results.pokemons[5]){
+        if (results.pokemons[5]) {
             results.pokemons[5] = await pokeapi.getPokemon(results.pokemons[5])
+        } else {
+            results.pokemons[5] = null
         }
         st = 200
     } catch (e) {
@@ -113,7 +125,7 @@ app.put('/api/addPokemons', jsonParser, async (req, res) => {
     let st = 200
     results = ''
     try {
-        req.body.tab.forEach(async(pokemon, id) => {
+        req.body.tab.forEach(async (pokemon, id) => {
             results[id] = await db.addPokemon(req.body.id, id + 1, pokemon)
         });
     } catch (e) {
