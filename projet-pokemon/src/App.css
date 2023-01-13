@@ -4,3 +4,16 @@
     height: 100vh;
     overflow: hidden;
 }
+
+.help_button{
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    width: 30px;
+    height: 30px;
+    background-color: black;
+    color: white;
+    border-radius: 50%;
+    font-size: 20px;
+    cursor: pointer;
+}

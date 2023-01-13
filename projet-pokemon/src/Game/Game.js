@@ -15,11 +15,6 @@ function Game() {
     const [isRandomCard, setIsRandomCard] = useState(false)
 
     useEffect(() => {
-        // Test si les données sont chargées ! Ne marche pas !
-        if (!context.userInfo) {
-            console.log('Donnée non chargée !!')
-            navigate('/')
-        }
 
         // Test si l'affichage du bouton d'ajout est true
         if (!isRandomCard) {

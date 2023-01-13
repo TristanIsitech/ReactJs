@@ -16,17 +16,22 @@ function App() {
             .catch((err) => {
                 console.log("error : ", err)
             })
-    }, [])
+    }, [context])
 
     useEffect(() => {
-        if(context.userInfo){
+        if (context.userInfo) {
             navigate('/game')
         }
     })
 
     return (
         <div className='loading'>
-            <p>IN LOADING</p>
+            <div className='loader'>IN LOADING
+                <p className='jump1'>.</p>
+                <p className='jump2'>.</p>
+                <p className='jump3'>.</p>
+            </div>
+            <div className='pulse' />
         </div>
     )
 }

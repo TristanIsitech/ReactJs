@@ -1,0 +1,57 @@
+.loading {
+    width: 100%;
+    height: 100%;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.loading .loader{
+    font-size: 25px;
+    font-weight: 400;
+    padding-bottom: 20px;
+    display: flex;
+}
+
+.loading .loader p{
+    padding-left: 5px;
+    font-weight: 600;
+}
+
+.loading .loader .jump1{
+    animation: jump 1.8s infinite;
+}
+.loading .loader .jump2{
+    animation: jump 1.8s infinite .6s;
+}
+.loading .loader .jump3{
+    animation: jump 1.8s infinite 1.2s;
+}
+
+.loading .pulse {
+    width: 50px;
+    height: 50px;
+    background-color: black;
+    border-radius: 50%;
+    box-shadow: 0 0 0 0 rgba(0, 0, 0, 1);
+    animation: pulse 1.3s infinite ease-out;
+}
+
+@keyframes jump {
+    0%{
+        transform: none;
+    }
+    15%{
+        transform: translate(0, -5px);
+    }
+    30%{
+        transform: none;
+    }
+}
+
+@keyframes pulse {
+    100% {
+        box-shadow: 0 0 0 10px rgba(0, 0, 0, 0);
+    }
+}
