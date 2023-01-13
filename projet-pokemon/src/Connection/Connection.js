@@ -1,8 +1,9 @@
 import React from 'react'
+import './Connection.css'
 
 function Connection() {
   return (
-    <div className='login'>
+    <div className='connection'>
       <h2 className='label'>Username</h2>
       <input type="text" placeholder="Enter Username" name="uname" required />
 
