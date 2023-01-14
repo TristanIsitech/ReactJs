@@ -15,7 +15,8 @@ function App() {
       <Link to="/help" ><button className='help_button'>?</button></Link>
       <Routes>
         <Route path="/" element={<Connexion />} />
-        {context.userInfo ? <Route path="/game" element={<Game />} /> : <Route path="/game" element={<Loading />} />}
+        <Route path="/loading" element={<Loading />} /> 
+        {context.userInfo ? <Route path="/game" element={<Game />} /> : <Route path="/game" element={<Connexion />} />}
         <Route path="/help" element={<Help />} />
       </Routes>
     </ div>

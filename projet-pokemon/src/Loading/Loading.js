@@ -9,14 +9,20 @@ function App() {
     const navigate = useNavigate()
 
     useEffect(() => {
-        axios.get("http://localhost:5400/api/connectUser?id=tristanL&psw=test")
+        axios.get("http://localhost:5400/api/connectUser?id=" + context.userParam.id + "&psw=" + context.userParam.psw)
             .then((res) => {
-                context.dispatchUserInfo({ type: 'INITIALISE', payload: res.data })
+                if (res.data) {
+                    context.dispatchUserInfo({ type: 'INITIALISE', payload: res.data })
+                    navigate('/game')
+                }else{
+                    context.dispatchUserParam({type: 'UNSET', payload: true})
+                    navigate('/')
+                }
             })
             .catch((err) => {
                 console.log("error : ", err)
             })
-    }, [context])
+    }, [context, navigate])
 
     useEffect(() => {
         if (context.userInfo) {

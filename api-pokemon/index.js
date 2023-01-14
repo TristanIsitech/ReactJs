@@ -30,49 +30,52 @@ app.get('/api/connectUser', async (req, res) => {
     let st = 200
     try {
         results = await db.connection(req.query)
-        results = {
-            id: results[0].id,
-            pseudo: results[0].pseudo,
-            champion: results[0].champion,
-            pokemons: [
-                results[0].poke_id1,
-                results[0].poke_id2,
-                results[0].poke_id3,
-                results[0].poke_id4,
-                results[0].poke_id5,
-                results[0].poke_id6
-            ]
+        if (results[0]) {
+            results = {
+                id: results[0].id,
+                pseudo: results[0].pseudo,
+                champion: results[0].champion,
+                pokemons: [
+                    results[0].poke_id1,
+                    results[0].poke_id2,
+                    results[0].poke_id3,
+                    results[0].poke_id4,
+                    results[0].poke_id5,
+                    results[0].poke_id6
+                ]
+            }
+            if (results.pokemons[0]) {
+                results.pokemons[0] = await pokeapi.getPokemon(results.pokemons[0])
+            } else {
+                results.pokemons[0] = null
+            }
+            if (results.pokemons[1]) {
+                results.pokemons[1] = await pokeapi.getPokemon(results.pokemons[1])
+            } else {
+                results.pokemons[1] = null
+            }
+            if (results.pokemons[2]) {
+                results.pokemons[2] = await pokeapi.getPokemon(results.pokemons[2])
+            } else {
+                results.pokemons[2] = null
+            }
+            if (results.pokemons[3]) {
+                results.pokemons[3] = await pokeapi.getPokemon(results.pokemons[3])
+            } else {
+                results.pokemons[3] = null
+            }
+            if (results.pokemons[4]) {
+                results.pokemons[4] = await pokeapi.getPokemon(results.pokemons[4])
+            } else {
+                results.pokemons[4] = null
+            }
+            if (results.pokemons[5]) {
+                results.pokemons[5] = await pokeapi.getPokemon(results.pokemons[5])
+            } else {
+                results.pokemons[5] = null
+            }
         }
-        if (results.pokemons[0]) {
-            results.pokemons[0] = await pokeapi.getPokemon(results.pokemons[0])
-        } else {
-            results.pokemons[0] = null
-        }
-        if (results.pokemons[1]) {
-            results.pokemons[1] = await pokeapi.getPokemon(results.pokemons[1])
-        } else {
-            results.pokemons[1] = null
-        }
-        if (results.pokemons[2]) {
-            results.pokemons[2] = await pokeapi.getPokemon(results.pokemons[2])
-        } else {
-            results.pokemons[2] = null
-        }
-        if (results.pokemons[3]) {
-            results.pokemons[3] = await pokeapi.getPokemon(results.pokemons[3])
-        } else {
-            results.pokemons[3] = null
-        }
-        if (results.pokemons[4]) {
-            results.pokemons[4] = await pokeapi.getPokemon(results.pokemons[4])
-        } else {
-            results.pokemons[4] = null
-        }
-        if (results.pokemons[5]) {
-            results.pokemons[5] = await pokeapi.getPokemon(results.pokemons[5])
-        } else {
-            results.pokemons[5] = null
-        }
+        else { results = null }
         st = 200
     } catch (e) {
         console.log(e)
