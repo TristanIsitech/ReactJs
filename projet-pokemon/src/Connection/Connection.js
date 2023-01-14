@@ -1,31 +1,32 @@
 import './Connection.css'
 import React, { useContext } from 'react'
-import { useNavigate } from 'react-router-dom';
+import { Routes, Route, Link, useNavigate } from 'react-router-dom';
 import { myAppContext } from './../Store/appContext.js';
+import Login from './Login/Login'
+import Create from './Create/Create'
 
 function Connection() {
-  
+
   const navigate = useNavigate()
   const context = useContext(myAppContext)
 
-  const setParam = (event) => {
-    event.preventDefault()
-    context.dispatchUserParam({type:'SET', payload: {id: event.target["id"].value, psw: event.target["psw"].value}})
+  const setParam = (payload) => {
+    console.log(payload)
+    context.dispatchUserParam({ type: 'SET', payload: payload })
     navigate('/loading')
   }
 
   return (
-    <form className='connection' onSubmit={setParam}>
-      <h2 className='label'>Username</h2>
-      <input type="text" placeholder="Enter Username" name="id" required />
-
-      <h2 className='label'>Password</h2>
-      <input type="password" placeholder="Enter Password" name="psw" required />
-
-      {context.userParam.isFalse && <h2 className='error'>Identifiant ou mot de passe incorrect !!</h2>}
-
-      <button type='submit'>Login</button>
-    </form>
+    <div className='connection'>
+      <div className='buttoncontainer'>
+        <Link to="/"><button>Login</button></Link>
+        <Link to="/createAccount"><button>Create a account</button></Link>
+      </div>
+      <Routes>
+        <Route path="*" element={<Login setParam={setParam} />} />
+        <Route path="/createAccount" element={<Create setParam={setParam} />} />
+      </Routes>
+    </div>
   )
 }
 

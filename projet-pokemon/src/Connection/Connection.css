@@ -1,4 +1,4 @@
-.connection{
+.connection {
     width: 100%;
     height: 100%;
     display: flex;
@@ -6,9 +6,23 @@
     align-items: center;
     flex-direction: column;
     gap: 10px;
+    background-color: rgba(255, 255, 255, 0.2);
 }
 
-.connection input{
+.connection form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.connection .buttoncontainer{
+    display: flex;
+    gap: 30px;
+}
+
+.connection input {
     margin-bottom: 10px;
     padding: 10px;
     width: 300px;
@@ -21,35 +35,32 @@
 }
 
 .connection input:focus,
-.connection input:hover{
+.connection input:hover {
     background-color: black;
     color: white;
     border: 2px solid transparent;
 }
 
-.connection h2{
+.connection h2 {
     color: black;
     font-size: 20px;
     font-weight: 500;
 }
 
-.connection button{
+.connection button {
     height: 45px;
     width: 100px;
     color: black;
     cursor: pointer;
-    font-weight: 500; 
+    font-weight: 500;
     border-radius: 8px;
     border: 2px solid black;
     background-color: transparent;
     transition: all .2s ease-in-out;
 }
 
-.connection button:hover{
+.connection button:hover {
     border: none;
     background-color: black;
     color: white;
 }
-
-
-

@@ -9,19 +9,54 @@ function App() {
     const navigate = useNavigate()
 
     useEffect(() => {
-        axios.get("http://localhost:5400/api/connectUser?id=" + context.userParam.id + "&psw=" + context.userParam.psw)
-            .then((res) => {
-                if (res.data) {
-                    context.dispatchUserInfo({ type: 'INITIALISE', payload: res.data })
-                    navigate('/game')
-                }else{
-                    context.dispatchUserParam({type: 'UNSET', payload: true})
-                    navigate('/')
+        if (!context.userParam.create) {
+            axios.get("http://localhost:5400/api/connectUser?id=" + context.userParam.id + "&psw=" + context.userParam.psw)
+                .then((res) => {
+                    if (res.data) {
+                        context.dispatchUserInfo({ type: 'INITIALISE', payload: res.data })
+                        navigate('/game')
+                    } else {
+                        context.dispatchUserParam({ type: 'UNSET', payload: true })
+                        navigate('/')
+                    }
+                })
+                .catch((err) => {
+                    console.log("error : ", err)
+                })
+        } else {
+            if (context.userParam.psw === context.userParam.psw_conf) {
+                const json = {
+                    id: context.userParam.id,
+                    psw: context.userParam.psw,
+                    pseudo: context.userParam.pseudo,
                 }
-            })
-            .catch((err) => {
-                console.log("error : ", err)
-            })
+                axios.post("http://localhost:5400/api/createUser", json)
+                    .then((res) => {
+                        console.log(res.data)
+                        if (res.data) {
+                            context.dispatchUserInfo({
+                                type: 'INITIALISE', payload:
+                                {
+                                    id: context.userParam.id,
+                                    champion: null,
+                                    pseudo: context.userParam.pseudo,
+                                    pokemons: []
+                                }
+                            })
+                            navigate('/game')
+                        } else {
+                            context.dispatchUserParam({ type: 'UNSET', payload: true })
+                            navigate('/connect')
+                        }
+                    })
+                    .catch((err) => {
+                        console.log("error : ", err)
+                    })
+            }
+            else {
+                context.dispatchUserParam({ type: 'UNSET', payload: true })
+            }
+        }
     }, [context, navigate])
 
     useEffect(() => {

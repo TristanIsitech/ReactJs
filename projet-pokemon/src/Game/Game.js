@@ -45,7 +45,6 @@ function Game() {
                 "id": context.userInfo.id,
                 "tab": newTabPokemon
             }
-            console.log(jsonBody)
             await axios.put("http://localhost:5400/api/addPokemons", jsonBody)
                 .catch((err) => {
                     console.log("error : ", err)
@@ -65,7 +64,6 @@ function Game() {
                 "id": context.userInfo.id,
                 "tab": [...newTabPokemon, tab.id]
             }
-            console.log(jsonBody)
             await axios.put("http://localhost:5400/api/addPokemons", jsonBody)
                 .catch((err) => {
                     console.log("error : ", err)

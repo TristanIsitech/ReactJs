@@ -32,7 +32,8 @@ export const MyAppContextProvider = ({ children }) => {
     switch (action.type) {
       case 'SET':
         console.log('SET')
-        return { isFalse :state.isFalse, id: action.payload.id, psw: action.payload.psw }
+        console.log(action.payload)
+        return { isFalse :state.isFalse, ...action.payload }
       case 'UNSET':
         console.log('UNSET')
         return {isFalse: action.payload}

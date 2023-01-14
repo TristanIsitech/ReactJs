@@ -91,12 +91,12 @@ app.post('/api/createUser', jsonParser, async (req, res) => {
     let st = 200
     try {
         results = await db.notUser(req.body.id)
-        if (results == null || results == []) {
+        if (!results[0]) {
             results = await db.createConnection(req.body)
             st = 200
         }
         else {
-            results = "This user already exist !"
+            results = null
             st = 409
         }
     } catch (e) {

@@ -33,9 +33,9 @@ dbpokemon.notUser = (id) => {
     })
 }
 
-dbpokemon.createConnection = (id, psw, pseudo) => {
+dbpokemon.createConnection = (body) => {
     return new Promise((resolve, reject) => {
-        pool.query(`INSERT INTO player(id, pseudo, psw, champion) VALUES ('` + id + `', '` + pseudo + `', '` + psw + `', false)`, (err, results) => {
+        pool.query(`INSERT INTO player(id, pseudo, psw, champion) VALUES ('` + body.id + `', '` + body.pseudo + `', '` + body.psw + `', false)`, (err, results) => {
             if (err) {
                 return reject(err)
             }
