@@ -11,7 +11,6 @@ function Connection() {
   const context = useContext(myAppContext)
 
   const setParam = (payload) => {
-    console.log(payload)
     context.dispatchUserParam({ type: 'SET', payload: payload })
     navigate('/loading')
   }

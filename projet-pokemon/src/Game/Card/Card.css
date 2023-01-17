@@ -1,4 +1,4 @@
-.card{
+.card {
     height: 350px;
     width: 270px;
     display: flex;
@@ -9,154 +9,188 @@
     transition: all .3s ease-out;
 }
 
-.card.normal{
+.card.normal {
     background-color: rgb(210, 210, 210);
 }
-.card.fire{
+
+.card.fire {
     background-color: rgb(255, 0, 0);
 }
-.card.grass{
+
+.card.grass {
     background-color: green;
 }
-.card.water{
+
+.card.water {
     background-color: blue;
 }
-.card.dark{
+
+.card.dark {
     background-color: rgb(50, 50, 50);
 }
-.card.poison{
+
+.card.poison {
     background-color: magenta;
 }
-.card.ice{
+
+.card.ice {
     background-color: cyan;
 }
-.card.rock{
+
+.card.rock {
     background-color: rgb(145, 54, 29);
 }
-.card.ground{
+
+.card.ground {
     background-color: rgb(231, 119, 39);
 }
-.card.electric{
+
+.card.electric {
     background-color: yellow;
 }
-.card.psychic{
+
+.card.psychic {
     background-color: blueviolet;
 }
-.card.bug{
+
+.card.bug {
     background-color: rgb(37, 225, 16);
 }
-.card.fighting{
+
+.card.fighting {
     background-color: rgb(140, 21, 21);
 }
-.card.ghost{
+
+.card.ghost {
     background-color: rgb(58, 17, 92);
 }
-.card.dragon{
+
+.card.dragon {
     background-color: midnightblue;
 }
-.card.fairy{
+
+.card.fairy {
     background-color: pink;
 }
-.card.flying{
+
+.card.flying {
     background-color: rgb(138, 237, 237);
 }
-.card.steel{
+
+.card.steel {
     background-color: darkgray;
 }
 
-.card.position0{
+.card.position0 {
     transform: translate(0, 2%);
 }
-.card.position0:hover{
+
+.card.position0:hover {
     transform: translate(0, -10%) scale(1.2, 1.2);
     z-index: 100;
 }
 
-.card.position1{
+.card.position1 {
     transform: translate(150%, 25%) rotate(-25deg);
 }
-.card.position1:hover{
+
+.card.position1:hover {
     transform: translate(150%, -10%) rotate(-5deg) scale(1.2, 1.2);
     z-index: 100;
 }
 
-.card.position2{
+.card.position2 {
     transform: translate(90%, 12%) rotate(-12deg);
 }
-.card.position2:hover{
+
+.card.position2:hover {
     transform: translate(90%, -10%) rotate(-5deg) scale(1.2, 1.2);
     z-index: 100;
 }
 
-.card.position3{
+.card.position3 {
     transform: translate(30%, 5%) rotate(-5deg);
 }
-.card.position3:hover{
+
+.card.position3:hover {
     transform: translate(30%, -10%) rotate(-5deg) scale(1.2, 1.2);
     z-index: 100;
 }
 
-.card.position4{
+.card.position4 {
     transform: translate(-30%, 5%) rotate(5deg);
 }
-.card.position4:hover{
+
+.card.position4:hover {
     transform: translate(-30%, -10%) rotate(5deg) scale(1.2, 1.2);
     z-index: 100;
 }
 
-.card.position5{
+.card.position5 {
     transform: translate(-90%, 12%) rotate(12deg);
 }
-.card.position5:hover{
+
+.card.position5:hover {
     transform: translate(-90%, -10%) rotate(5deg) scale(1.2, 1.2);
     z-index: 100;
 }
 
-.card.position6{
+.card.position6 {
     transform: translate(-150%, 25%) rotate(25deg);
 }
-.card.position6:hover{
+
+.card.position6:hover {
     transform: translate(-150%, -10%) rotate(5deg) scale(1.2, 1.2);
     z-index: 100;
 }
 
-.card.card.position7{
+.card.card.position7 {
     position: absolute;
     top: 0;
 }
-.card.card.position7:hover{
+
+.card.card.position7:hover {
     position: absolute;
     top: 0;
     transform: translate(0, 5%) scale(1.1, 1.1);
 }
 
-.card .title{
+.card .title {
     display: flex;
+    flex-wrap: nowrap;
     justify-content: space-between;
     padding: 10px 10px 0 10px;
+    gap: 10px;
+    overflow: hidden;
 }
 
-.card h1{
+.card h1 {
     font-size: 22px;
     font-weight: 300;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }
 
-.card h2{
-    padding: 0 10px 0 10px;
+.card .title p {
+    white-space: nowrap;
 }
 
-.card img{
+.card h2 {
+    padding: 0 10px;
+}
+
+.card img {
     width: 220px;
     height: auto;
     padding: 0 25px 10px;
 }
 
-.card .stats{
+.card .stats {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-evenly;
 }
 
-.card .stat{
-    white-space:nowrap
+.card .stat {
+    white-space: nowrap
 }

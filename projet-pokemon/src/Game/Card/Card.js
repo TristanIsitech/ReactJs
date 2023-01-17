@@ -18,7 +18,7 @@ function Game(props) {
                     index !== 0 && <p className='stat' key={index}>{stat.stat.name} : {stat.base_stat}</p>
                 ))}
             </div>
-        </div>
+        </div> 
     )
 }
 

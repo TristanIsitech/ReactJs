@@ -32,7 +32,6 @@ function App() {
                 }
                 axios.post("http://localhost:5400/api/createUser", json)
                     .then((res) => {
-                        console.log(res.data)
                         if (res.data) {
                             context.dispatchUserInfo({
                                 type: 'INITIALISE', payload:
@@ -40,7 +39,9 @@ function App() {
                                     id: context.userParam.id,
                                     champion: null,
                                     pseudo: context.userParam.pseudo,
-                                    pokemons: []
+                                    pokemons: [
+                                        null, null, null, null, null, null
+                                    ]
                                 }
                             })
                             navigate('/game')
